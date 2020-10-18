@@ -8,7 +8,7 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate_petshop?autoReconnect=true&amp;useTimezone=true&amp;serverTimezone=America/Sao_Paulo&amp;zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password"></property>
-    <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.format_sql">true</property>    
+<!--    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>    -->
   </session-factory>
 </hibernate-configuration> 

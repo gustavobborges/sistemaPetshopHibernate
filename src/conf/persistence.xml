@@ -3,6 +3,7 @@
   <persistence-unit name="HibernatePetshopPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>br.com.hibernatepetshop.entidade.Fornecedor</class>
+    <class>br.com.hibernatepetshop.entidade.Produto</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate_petshop?useTimezone=true&amp;serverTimezone=America/Sao_Paulo&amp;zeroDateTimeBehavior=convertToNull"/>

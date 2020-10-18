@@ -6,6 +6,7 @@
 package br.com.hibernatepetshop.dao;
 
 import br.com.hibernatepetshop.entidade.Fornecedor;
+import br.com.hibernatepetshop.entidade.Produto;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -27,6 +28,7 @@ public class HibernateUtil {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             Configuration cfg = new Configuration();
             cfg.addAnnotatedClass(Fornecedor.class);
+            cfg.addAnnotatedClass(Produto.class);
             
             cfg.configure("/br/com/hibernatepetshop/dao/hibernate.cfg.xml");
             ServiceRegistry servico = new StandardServiceRegistryBuilder().

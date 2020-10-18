@@ -9,6 +9,7 @@ import br.com.hibernatepetshop.entidade.Fornecedor;
 import br.com.hibernatepetshop.util.UtilTeste;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class FornecedorDaoImplTest {
         fornecedorDao = new FornecedorDaoImpl();
     }
     
-    @Test
+//    @Test
     public void testSalvar() {
         System.out.println("salvar");
         fornecedor = new Fornecedor(null,
@@ -44,41 +45,82 @@ public class FornecedorDaoImplTest {
         sessao.close();
         assertNotNull(fornecedor.getId());
     }
+    
+//    @Test
+    public void testAlterar() {
+        System.out.println("alterar");
+        buscarFornecedorBd();
+        fornecedor.setNome("nome alterador");
+        fornecedor.setEmail("e-mail alterado");
+                
+        sessao = HibernateUtil.abrirSessao();
+        fornecedorDao.salvarOuAlterar(fornecedor, sessao);
+        Fornecedor fornecedorAlt = fornecedorDao.pesquisarPorId(fornecedor.getId(), sessao);
+        sessao.close();
+        assertEquals(fornecedor.getNome(), fornecedorAlt.getNome());
+        assertEquals(fornecedor.getEmail(), fornecedorAlt.getEmail());
+
+    }
+    
+//    @Test
+    public void testExcluir() {
+        System.out.println("excluir");
+        buscarFornecedorBd();
+        
+        sessao = HibernateUtil.abrirSessao();
+        fornecedorDao.remover(fornecedor, sessao);
+        Fornecedor fornecedorExcluido = fornecedorDao.pesquisarPorId(fornecedor.getId(), sessao);
+        sessao.close();
+        assertNull(fornecedorExcluido);
+    }
+    
 
 //    @Test;
     public void testPesquisarPorId() {
-        
-        Session sessao = null;
+        System.out.println("pesquisarPorId");
+        buscarFornecedorBd();
+        Long id = fornecedor.getId();
+        sessao = HibernateUtil.abrirSessao();
+        Fornecedor fornecedorId = fornecedorDao.pesquisarPorId(id, sessao);
+        sessao.close();
+        assertNotNull(fornecedorId);
     }
 
-//    @Test
+    @Test
     public void testPesquisarPorNome() {
-        
-        Session sessao = null;
+        System.out.println("PesquisarPorNome");
+        buscarFornecedorBd();
+        sessao = HibernateUtil.abrirSessao();
+        List <Fornecedor> fornecedores = fornecedorDao.pesquisarPorNome(fornecedor.getNome(), sessao);
+        sessao.close();
+        assertTrue(fornecedores.size() > 0);
     }
 
-//    @Test
+    @Test
     public void testPesquisarTodo() {
-        
-        Session sessao = null;
+        System.out.println("pesquisarTodo");
+        buscarFornecedorBd();
+        sessao = HibernateUtil.abrirSessao();
+        List <Fornecedor> fornecedores = fornecedorDao.pesquisarTodo(sessao);
+        sessao.close();
+        assertTrue(fornecedores.size() > 0);
     }
     
-    public Fornecedor buscarFornecedorBd() {
+  public Fornecedor buscarFornecedorBd(){
         Long id;
         sessao = HibernateUtil.abrirSessao();
-        
         try {
             Query consulta = sessao.createQuery("SELECT max(id) FROM Fornecedor");
             id = (Long) consulta.uniqueResult();
-            if(id == null) {
+            if(id == null){
                 sessao.close();
                 testSalvar();
-            } else {
-                fornecedor = fornecedorDao.pesquisarPorId(id, sessao);
-                sessao.close();
+            }else{
+               fornecedor = fornecedorDao.pesquisarPorId(id, sessao);
+               sessao.close();
             }
-        } catch (Exception e) {
-            System.out.println("Erro ao pesquisar buscarFonecedorBd " + e.getMessage());
+        } catch (HibernateException e) {
+            System.err.println("Erro ao pesquisar buscarFornecedorBd " + e.getMessage());
         }
         return fornecedor;
     }
