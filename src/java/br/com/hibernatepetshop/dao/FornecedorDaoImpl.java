@@ -30,5 +30,12 @@ public class FornecedorDaoImpl extends BaseDaoImpl<Fornecedor, Long> implements 
         Query consulta = sessao.createQuery("FROM Fornecedor");
         return consulta.list();   
     }
+
+    @Override
+    public Fornecedor pesquisarPorNomeProduto(String nomeProduto, Session session) throws HibernateException {
+        Query consulta = session.createQuery("SELECT DISTINCT(f) FROM Fornecedor f join fetch produtos p WHERE p.nome LIKE :nomeProduto");
+        consulta.setParameter("nomeProduto", "%" + nomeProduto + "%");
+        return (Fornecedor) consulta.uniqueResult();   
+    }
     
 }

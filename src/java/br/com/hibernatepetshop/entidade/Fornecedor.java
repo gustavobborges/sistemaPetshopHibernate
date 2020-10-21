@@ -7,12 +7,15 @@ package br.com.hibernatepetshop.entidade;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,6 +47,10 @@ public class Fornecedor implements Serializable {
 
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
+   
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fornecedor")
+    private List<Produto> produtos;
+    
 
     public Fornecedor() {
     }
@@ -110,6 +117,14 @@ public class Fornecedor implements Serializable {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package br.com.hibernatepetshop.dao;
 
+import br.com.hibernatepetshop.entidade.Fornecedor;
 import br.com.hibernatepetshop.entidade.Produto;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -18,4 +19,9 @@ public interface ProdutoDao extends BaseDao<Produto, Long>{
     
     List<Produto> pesquisarPorNome(String nome, Session session) throws HibernateException;
     
-}
+    List<Produto> pesquisarPorFornecedor(String fornecedor, Session session) throws HibernateException;
+    
+    List<Produto> pesquisarPorProdutoEstoque(int qtd, String nomeProduto, Session session) throws HibernateException;
+
+    List<Produto> pesquisarPorPrecoMinimoMaximo(double minino, double maximo, Session session) throws HibernateException;
+    }

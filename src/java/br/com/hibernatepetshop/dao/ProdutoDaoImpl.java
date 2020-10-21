@@ -28,5 +28,28 @@ public class ProdutoDaoImpl extends BaseDaoImpl<Produto, Long> implements Produt
         consulta.setParameter("nome", "%" + nome + "%");
         return consulta.list();
     }
-    
+
+    @Override
+    public List<Produto> pesquisarPorFornecedor(String fornecedor, Session session) throws HibernateException {
+        Query consulta = session.createQuery("FROM Produto WHERE fornecedor.nome LIKE :nomeFornecedor");
+        consulta.setParameter("nomeFornecedor", "%" + fornecedor + "%");
+        return consulta.list();
+           }
+
+    @Override
+    public List<Produto> pesquisarPorProdutoEstoque(int qtd, String nome, Session session) throws HibernateException {
+        Query consulta = session.createQuery("FROM Produto WHERE estoque <= :qtdEstoque AND nome LIKE :produto");
+        consulta.setParameter("qtdEstoque", qtd);
+        consulta.setParameter("produto", "%" + nome + "%");
+        return consulta.list();
+    }    
+
+    @Override
+    public List<Produto> pesquisarPorPrecoMinimoMaximo(double minimo, double maximo, Session session) throws HibernateException {
+        Query consulta = session.createQuery("FROM Produto WHERE preco BETWEEN :minimo AND :maximo");
+        consulta.setParameter("minimo", minimo);
+        consulta.setParameter("maximo", maximo);
+        return consulta.list();
+    }
+
 }

@@ -21,6 +21,7 @@ import static org.junit.Assert.*;
  */
 public class ProdutoDaoImplTest {
     private Produto produto;
+    private Fornecedor fornecedor;
     private ProdutoDao produtoDao;
     private Session session;
     private FornecedorDaoImplTest fornecedorDaoImpl;
@@ -42,7 +43,7 @@ public class ProdutoDaoImplTest {
         );
         
         fornecedorDaoImpl = new FornecedorDaoImplTest();
-        Fornecedor fornecedor = fornecedorDaoImpl.buscarFornecedorBd();
+        fornecedor = fornecedorDaoImpl.buscarFornecedorBd();
         produto.setFornecedor(fornecedor);
         
         session = HibernateUtil.abrirSessao();
@@ -78,8 +79,39 @@ public class ProdutoDaoImplTest {
     public void testPesquisarPorId() {
         System.out.println("pesquisarPorId");
     }
+    
+    //    @Test
+    public void testPesquisarPorFornecedor() {
+        System.out.println("pesquisarPorFornecedor");
+        buscarProdutoBd();
+        session = HibernateUtil.abrirSessao();
+        List<Produto> produtos = produtoDao.pesquisarPorFornecedor(fornecedor.getNome(), session);
+        session.close();
+        assertTrue(produtos.size() > 0);            
+    }
+    
+    
+//    @Test
+    public void testPesquisarPorProdutoEstoque() {
+        System.out.println("pesquisarPorProdutoEstoque");
+        buscarProdutoBd();
+        int qtd = produto.getEstoque();
+        session = HibernateUtil.abrirSessao();
+        List<Produto> produtos = produtoDao.pesquisarPorProdutoEstoque(qtd, produto.getNome(), session);
+        assertTrue(produtos.size() > 0);
 
+    }
     @Test
+    public void testPesquisarPorPrecoMinimoMaximo() {
+        System.out.println("pesquisarPorPrecoMinimoMaximo");
+        buscarProdutoBd();
+        session = HibernateUtil.abrirSessao();
+        List<Produto> produtos = produtoDao.pesquisarPorPrecoMinimoMaximo((produto.getPreco() - 20), produto.getPreco(), session);
+        System.out.println("Tamanho: " + produtos.size());
+        assertTrue(!produtos.isEmpty());
+    }
+    
+//    @Test
     public void testPesquisarPorNome() {
         System.out.println("pesquisarPorNome");
         buscarProdutoBd();
@@ -111,5 +143,11 @@ public class ProdutoDaoImplTest {
       }
       return produto;
     }
+
+
+
+
+
+
     
 }

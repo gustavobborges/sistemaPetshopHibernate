@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/FornecedorDao.java</file>
+            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/FornecedorDaoImpl.java</file>
             <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/test/br/com/hibernatepetshop/dao/FornecedorDaoImplTest.java</file>
-            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/entidade/Produto.java</file>
-            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/ProdutoDao.java</file>
             <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/test/br/com/hibernatepetshop/dao/ProdutoDaoImplTest.java</file>
-            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/util/GeradorTabela.java</file>
-            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/HibernateUtil.java</file>
-            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/BaseDaoImpl.java</file>
-            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/ProdutoDaoImpl.java</file>
         </group>
     </open-files>
 </project-private>

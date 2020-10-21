@@ -19,4 +19,7 @@ public interface FornecedorDao extends BaseDao<Fornecedor, Long>{
     List<Fornecedor> pesquisarPorNome(String nome, Session session) throws HibernateException;
     
     List<Fornecedor> pesquisarTodo(Session sessao) throws HibernateException;
+    
+    Fornecedor pesquisarPorNomeProduto(String nomeProduto, Session session) throws HibernateException;
+
 }

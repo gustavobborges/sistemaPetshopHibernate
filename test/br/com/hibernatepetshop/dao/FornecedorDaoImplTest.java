@@ -6,6 +6,7 @@
 package br.com.hibernatepetshop.dao;
 
 import br.com.hibernatepetshop.entidade.Fornecedor;
+import br.com.hibernatepetshop.entidade.Produto;
 import br.com.hibernatepetshop.util.UtilTeste;
 import java.util.Date;
 import java.util.List;
@@ -86,7 +87,7 @@ public class FornecedorDaoImplTest {
         assertNotNull(fornecedorId);
     }
 
-    @Test
+//    @Test
     public void testPesquisarPorNome() {
         System.out.println("PesquisarPorNome");
         buscarFornecedorBd();
@@ -96,7 +97,7 @@ public class FornecedorDaoImplTest {
         assertTrue(fornecedores.size() > 0);
     }
 
-    @Test
+//    @Test
     public void testPesquisarTodo() {
         System.out.println("pesquisarTodo");
         buscarFornecedorBd();
@@ -104,6 +105,23 @@ public class FornecedorDaoImplTest {
         List <Fornecedor> fornecedores = fornecedorDao.pesquisarTodo(sessao);
         sessao.close();
         assertTrue(fornecedores.size() > 0);
+    }
+    
+    @Test
+    public void testPesquisarPorNomeProduto() {
+        System.out.println("pesquisarPorNomeProduto");
+        
+        sessao = HibernateUtil.abrirSessao();
+        fornecedor = fornecedorDao.pesquisarPorNomeProduto("escada", sessao);
+        sessao.close();
+        System.out.println("Fornecedor: " + fornecedor.getNome());
+        for (Produto prod : fornecedor.getProdutos()) {
+            System.out.println("Produto " + prod.getNome());
+            System.out.println("Estoque " + prod.getEstoque());
+            System.out.println(" "); 
+        };
+
+
     }
     
   public Fornecedor buscarFornecedorBd(){
@@ -124,5 +142,7 @@ public class FornecedorDaoImplTest {
         }
         return fornecedor;
     }
+
+
     
 }
