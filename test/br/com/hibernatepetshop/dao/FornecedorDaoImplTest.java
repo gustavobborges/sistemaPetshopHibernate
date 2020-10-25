@@ -107,21 +107,13 @@ public class FornecedorDaoImplTest {
         assertTrue(fornecedores.size() > 0);
     }
     
-    @Test
+//    @Test
     public void testPesquisarPorNomeProduto() {
         System.out.println("pesquisarPorNomeProduto");
-        
+        buscarFornecedorBd();
         sessao = HibernateUtil.abrirSessao();
-        fornecedor = fornecedorDao.pesquisarPorNomeProduto("escada", sessao);
+        fornecedor = fornecedorDao.pesquisarPorNomeProduto(fornecedor.getNome(), sessao);
         sessao.close();
-        System.out.println("Fornecedor: " + fornecedor.getNome());
-        for (Produto prod : fornecedor.getProdutos()) {
-            System.out.println("Produto " + prod.getNome());
-            System.out.println("Estoque " + prod.getEstoque());
-            System.out.println(" "); 
-        };
-
-
     }
     
   public Fornecedor buscarFornecedorBd(){

@@ -43,6 +43,10 @@ public class Produto implements Serializable {
     @JoinColumn(name = "idFornecedor")
     private Fornecedor fornecedor;
     
+    @ManyToOne
+    @JoinColumn(name = "idCategoria")
+    private Categoria categoria;
+    
     public Produto() {
     }
 
@@ -109,6 +113,14 @@ public class Produto implements Serializable {
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
      
     

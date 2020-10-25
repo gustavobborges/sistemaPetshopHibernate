@@ -5,6 +5,7 @@
  */
 package br.com.hibernatepetshop.dao;
 
+import br.com.hibernatepetshop.entidade.Categoria;
 import br.com.hibernatepetshop.entidade.Fornecedor;
 import br.com.hibernatepetshop.entidade.Produto;
 import org.hibernate.Session;
@@ -29,6 +30,8 @@ public class HibernateUtil {
             Configuration cfg = new Configuration();
             cfg.addAnnotatedClass(Fornecedor.class);
             cfg.addAnnotatedClass(Produto.class);
+            cfg.addAnnotatedClass(Categoria.class);
+
             
             cfg.configure("/br/com/hibernatepetshop/dao/hibernate.cfg.xml");
             ServiceRegistry servico = new StandardServiceRegistryBuilder().

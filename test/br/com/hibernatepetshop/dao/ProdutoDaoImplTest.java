@@ -5,6 +5,7 @@
  */
 package br.com.hibernatepetshop.dao;
 
+import br.com.hibernatepetshop.entidade.Categoria;
 import br.com.hibernatepetshop.entidade.Fornecedor;
 import br.com.hibernatepetshop.entidade.Produto;
 import br.com.hibernatepetshop.util.UtilTeste;
@@ -30,7 +31,7 @@ public class ProdutoDaoImplTest {
         produtoDao = new ProdutoDaoImpl();
     }
     
-//    @Test
+    @Test
     public void testSalvar() {
         System.out.println("salvar");
         produto = new Produto(
@@ -45,6 +46,10 @@ public class ProdutoDaoImplTest {
         fornecedorDaoImpl = new FornecedorDaoImplTest();
         fornecedor = fornecedorDaoImpl.buscarFornecedorBd();
         produto.setFornecedor(fornecedor);
+        
+        CategoriaDaoImplTest categoriaTeste = new CategoriaDaoImplTest();
+        Categoria categoria = categoriaTeste.buscarCategoriaBD();
+        produto.setCategoria(categoria);
         
         session = HibernateUtil.abrirSessao();
         produtoDao.salvarOuAlterar(produto, session);

@@ -6,7 +6,14 @@
             <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/FornecedorDao.java</file>
             <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/FornecedorDaoImpl.java</file>
             <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/test/br/com/hibernatepetshop/dao/FornecedorDaoImplTest.java</file>
+            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/CategoriaDao.java</file>
+            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/CategoriaDaoImpl.java</file>
+            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/entidade/Fornecedor.java</file>
             <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/test/br/com/hibernatepetshop/dao/ProdutoDaoImplTest.java</file>
+            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/test/br/com/hibernatepetshop/dao/CategoriaDaoImplTest.java</file>
+            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/util/GeradorTabela.java</file>
+            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/dao/HibernateUtil.java</file>
+            <file>file:/C:/Users/gusta/Documents/NetBeansProjects/HibernatePetshop/src/java/br/com/hibernatepetshop/entidade/Categoria.java</file>
         </group>
     </open-files>
 </project-private>
