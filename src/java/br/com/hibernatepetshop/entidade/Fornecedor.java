@@ -8,6 +8,7 @@ package br.com.hibernatepetshop.entidade;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,22 +28,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "fornecedor")
-public class Fornecedor implements Serializable {
+@PrimaryKeyJoinColumn(name = "idPessoa")
+public class Fornecedor extends Pessoa {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
-    @Column(length = 100, nullable = false)
-    private String nome;
-    
-    @Column(length = 100, nullable = false, unique = true)
-    private String email;
-    
-    @Column(length = 14, nullable = false, unique = true)
-    private String telefone;
-    
     @Lob
     private String descricao;
 
@@ -51,41 +40,16 @@ public class Fornecedor implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "fornecedor")
     private List<Produto> produtos;
     
-
+    @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)
+    private List<Endereco> enderecos;
+    
     public Fornecedor() {
     }
 
     public Fornecedor(Long id, String nome, String email, String telefone, String descricao, Date dataCadastro) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
+        super(id, nome, email, telefone);
         this.descricao = descricao;
         this.dataCadastro = dataCadastro;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getDescricao() {
@@ -103,21 +67,6 @@ public class Fornecedor implements Serializable {
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
     public List<Produto> getProdutos() {
         return produtos;
@@ -127,22 +76,13 @@ public class Fornecedor implements Serializable {
         this.produtos = produtos;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Fornecedor)) {
-            return false;
-        }
-        Fornecedor other = (Fornecedor) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
-    @Override
-    public String toString() {
-        return "br.com.hibernatepetshop.entidade.Fornecedor[ id=" + id + " ]";
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
+    
     
 }

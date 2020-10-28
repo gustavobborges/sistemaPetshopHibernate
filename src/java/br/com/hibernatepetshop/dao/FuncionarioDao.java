@@ -5,6 +5,8 @@
  */
 package br.com.hibernatepetshop.dao;
 
+import br.com.hibernatepetshop.entidade.Funcionario;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -12,12 +14,6 @@ import org.hibernate.Session;
  *
  * @author gusta
  */
-public interface BaseDao<T, ID> {
-    
-    void salvarOuAlterar(T entidade, Session session) throws HibernateException;
-    
-    void remover(T entidade, Session sessao) throws HibernateException;
-    
-    T pesquisarPorId(Long id, Session sessao)throws HibernateException;
-    
+public interface FuncionarioDao extends BaseDao<Funcionario, Long> {
+    List<Funcionario> pesquisarPorNome(String nome, Session session) throws HibernateException;
 }

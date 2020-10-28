@@ -5,9 +5,11 @@
  */
 package br.com.hibernatepetshop.dao;
 
+import br.com.hibernatepetshop.entidade.Endereco;
 import br.com.hibernatepetshop.entidade.Fornecedor;
 import br.com.hibernatepetshop.entidade.Produto;
 import br.com.hibernatepetshop.util.UtilTeste;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -30,9 +32,10 @@ public class FornecedorDaoImplTest {
         fornecedorDao = new FornecedorDaoImpl();
     }
     
-//    @Test
+    @Test
     public void testSalvar() {
         System.out.println("salvar");
+        List<Endereco> enderecos = new ArrayList<>();
         fornecedor = new Fornecedor(null,
             "Nome" + UtilTeste.gerarCaracter(7),
             UtilTeste.gerarEmail(),
@@ -41,10 +44,29 @@ public class FornecedorDaoImplTest {
             new Date()
         );
         
+        for (int i = 0; i < 2; i++) {
+            enderecos.add(criarEndereco());       
+        }
+        fornecedor.setEnderecos(enderecos);
+        for (Endereco endereco : enderecos) {
+            endereco.setFornecedor(fornecedor);
+        }
         sessao = HibernateUtil.abrirSessao();
         fornecedorDao.salvarOuAlterar(fornecedor, sessao);
         sessao.close();
         assertNotNull(fornecedor.getId());
+    }
+    
+    private Endereco criarEndereco() {
+            Endereco endereco = new Endereco(null, 
+             "Rua " + UtilTeste.gerarCaracter(7), 
+            UtilTeste.gerarNumero(3), 
+            "Bairro " + UtilTeste.gerarCaracter(7),
+            "Cidade " + UtilTeste.gerarCaracter(7), 
+            "SC", 
+            "88888-888", 
+            "casa");
+        return endereco;
     }
     
 //    @Test
@@ -60,7 +82,6 @@ public class FornecedorDaoImplTest {
         sessao.close();
         assertEquals(fornecedor.getNome(), fornecedorAlt.getNome());
         assertEquals(fornecedor.getEmail(), fornecedorAlt.getEmail());
-
     }
     
 //    @Test
@@ -95,6 +116,7 @@ public class FornecedorDaoImplTest {
         List <Fornecedor> fornecedores = fornecedorDao.pesquisarPorNome(fornecedor.getNome(), sessao);
         sessao.close();
         assertTrue(fornecedores.size() > 0);
+        assertTrue(fornecedores.get(0).getEnderecos().size() > 0);
     }
 
 //    @Test

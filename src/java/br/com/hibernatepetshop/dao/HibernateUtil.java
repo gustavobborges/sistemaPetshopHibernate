@@ -6,7 +6,10 @@
 package br.com.hibernatepetshop.dao;
 
 import br.com.hibernatepetshop.entidade.Categoria;
+import br.com.hibernatepetshop.entidade.Endereco;
 import br.com.hibernatepetshop.entidade.Fornecedor;
+import br.com.hibernatepetshop.entidade.Funcionario;
+import br.com.hibernatepetshop.entidade.Pessoa;
 import br.com.hibernatepetshop.entidade.Produto;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,9 +31,12 @@ public class HibernateUtil {
         try {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             Configuration cfg = new Configuration();
-            cfg.addAnnotatedClass(Fornecedor.class);
             cfg.addAnnotatedClass(Produto.class);
             cfg.addAnnotatedClass(Categoria.class);
+            cfg.addAnnotatedClass(Pessoa.class);
+            cfg.addAnnotatedClass(Funcionario.class);
+            cfg.addAnnotatedClass(Fornecedor.class);
+            cfg.addAnnotatedClass(Endereco.class);
 
             
             cfg.configure("/br/com/hibernatepetshop/dao/hibernate.cfg.xml");
