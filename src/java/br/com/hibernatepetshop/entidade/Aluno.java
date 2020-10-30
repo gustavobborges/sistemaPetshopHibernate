@@ -5,10 +5,34 @@
  */
 package br.com.hibernatepetshop.entidade;
 
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
 /**
  *
  * @author gusta
  */
-public class Aluno {
+@Entity
+@Table(name = "aluno")
+@PrimaryKeyJoinColumn(name = "idPessoaSenac")
+public class Aluno extends PessoaSenac {
     
+    private String matricula;
+
+    public Aluno() {
+    }
+
+    public Aluno(Long id, String nome, String cpf, String rg, String email, String matricula) {
+        super(id, nome, cpf, rg, email);
+        this.matricula = matricula;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }  
 }

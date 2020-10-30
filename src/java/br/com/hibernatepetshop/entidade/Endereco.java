@@ -52,6 +52,10 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "idFornecedor")
     private Fornecedor fornecedor;
     
+    @OneToOne
+    @JoinColumn(name = "idPessoaSenac")
+    private PessoaSenac pessoaSenac;
+    
     public Endereco() {
     }
 
@@ -144,6 +148,14 @@ public class Endereco implements Serializable {
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
+    }
+
+    public PessoaSenac getPessoaSenac() {
+        return pessoaSenac;
+    }
+
+    public void setPessoaSenac(PessoaSenac pessoaSenac) {
+        this.pessoaSenac = pessoaSenac;
     }
     
     @Override

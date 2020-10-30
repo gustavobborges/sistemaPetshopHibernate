@@ -35,6 +35,11 @@ public class UtilTeste {
         return numero;
     }
             
+    public static String gerarCpf() {
+        return gerarNumero(3) + "." + gerarNumero(3) + "." + gerarNumero(3) + "-" + gerarNumero(2);
+
+    }
+    
     public static String gerarTelefone() {
         return "(48)3" + gerarNumero(3) + "-" + gerarNumero(4);
     }

@@ -5,55 +5,36 @@
  */
 package br.com.hibernatepetshop.entidade;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+
 
 /**
  *
  * @author gusta
  */
 @Entity
-public class Professor implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Professor)) {
-            return false;
-        }
-        Professor other = (Professor) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.com.hibernatepetshop.entidade.Professor[ id=" + id + " ]";
-    }
+@Table(name = "professor")
+@PrimaryKeyJoinColumn(name = "idPessoaSenac")
+public class Professor  extends PessoaSenac{
     
+    private String cracha;
+
+    public Professor() {
+    }
+
+    public Professor(Long id, String nome, String cpf, String rg, String email, String cracha) {
+        super(id, nome, cpf, rg, email);
+        this.cracha = cracha;
+    }
+
+    public String getCracha() {
+        return cracha;
+    }
+
+    public void setCracha(String cracha) {
+        this.cracha = cracha;
+    }
 }

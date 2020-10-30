@@ -5,12 +5,16 @@
  */
 package br.com.hibernatepetshop.dao;
 
+import br.com.hibernatepetshop.entidade.Aluno;
 import br.com.hibernatepetshop.entidade.Categoria;
 import br.com.hibernatepetshop.entidade.Endereco;
 import br.com.hibernatepetshop.entidade.Fornecedor;
 import br.com.hibernatepetshop.entidade.Funcionario;
 import br.com.hibernatepetshop.entidade.Pessoa;
+import br.com.hibernatepetshop.entidade.PessoaSenac;
 import br.com.hibernatepetshop.entidade.Produto;
+import br.com.hibernatepetshop.entidade.Professor;
+import br.com.hibernatepetshop.entidade.Telefone;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -34,9 +38,13 @@ public class HibernateUtil {
             cfg.addAnnotatedClass(Produto.class);
             cfg.addAnnotatedClass(Categoria.class);
             cfg.addAnnotatedClass(Pessoa.class);
-            cfg.addAnnotatedClass(Funcionario.class);
+            cfg.addAnnotatedClass(PessoaSenac.class);
             cfg.addAnnotatedClass(Fornecedor.class);
+            cfg.addAnnotatedClass(Funcionario.class);
             cfg.addAnnotatedClass(Endereco.class);
+            cfg.addAnnotatedClass(Professor.class);
+            cfg.addAnnotatedClass(Aluno.class);
+            cfg.addAnnotatedClass(Telefone.class);
 
             
             cfg.configure("/br/com/hibernatepetshop/dao/hibernate.cfg.xml");
