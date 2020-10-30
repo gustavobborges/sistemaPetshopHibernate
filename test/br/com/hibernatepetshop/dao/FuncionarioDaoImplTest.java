@@ -25,6 +25,7 @@ public class FuncionarioDaoImplTest {
     private Session session;
     
     public FuncionarioDaoImplTest() {
+        funcionarioDao = new FuncionarioDaoImpl();
     }
     @Test
     public void testSalvar() {
