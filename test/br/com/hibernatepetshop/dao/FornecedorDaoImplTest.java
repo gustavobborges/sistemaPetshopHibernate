@@ -37,7 +37,7 @@ public class FornecedorDaoImplTest {
         System.out.println("salvar");
         List<Endereco> enderecos = new ArrayList<>();
         fornecedor = new Fornecedor(null,
-            "Nome" + UtilTeste.gerarCaracter(7),
+            "Nome " + UtilTeste.gerarCaracter(7),
             UtilTeste.gerarEmail(),
             UtilTeste.gerarTelefone(),
             "bla bla bla",

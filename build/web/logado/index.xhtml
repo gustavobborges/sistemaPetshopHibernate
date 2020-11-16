@@ -53,6 +53,13 @@
         </div>
 
         <div id="content" class="center_content">
+            
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                <p:graphicImage name="carregando.gif" library="imagem" />
+            </p:dialog>
+            
             <ui:insert name="content">            
                 <p:graphicImage library="images" name="surf.jpg" style="display: block; margin: auto;" />
             </ui:insert>

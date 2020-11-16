@@ -9,12 +9,15 @@ import br.com.hibernatepetshop.dao.FornecedorDao;
 import br.com.hibernatepetshop.dao.FornecedorDaoImpl;
 import br.com.hibernatepetshop.dao.HibernateUtil;
 import br.com.hibernatepetshop.entidade.Fornecedor;
-import com.mysql.cj.x.protobuf.MysqlxCrud.DataModel;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import org.hibernate.Session;
+import static org.primefaces.behavior.confirm.ConfirmBehavior.PropertyKeys.message;
 
 /**
  *
@@ -28,7 +31,7 @@ public class FornecedorControle {
     private Fornecedor fornecedor;
     private FornecedorDao fornecedorDao;
     private Session session;
-    private ListDataModel modelFornecedores;
+    private DataModel<Fornecedor> modelFornecedores;
     
     public void pesquisarPorNome() {
         try {
@@ -43,8 +46,25 @@ public class FornecedorControle {
         }
     }
     
-    //getters e setters
+    public void excluir() {
+        fornecedor = modelFornecedores.getRowData();
+        FacesContext context = FacesContext.getCurrentInstance();
 
+        try {
+            session = HibernateUtil.abrirSessao();
+            fornecedorDao = new FornecedorDaoImpl();
+            fornecedorDao.remover(fornecedor, session);
+            context.addMessage(null, new FacesMessage("Sucesso!",  "Excluído com sucesso!"));
+
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir" + e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+    
+    
+    //getters e setters
     public Fornecedor getFornecedor() {
         if(fornecedor == null) {
             fornecedor = new Fornecedor();
@@ -57,7 +77,7 @@ public class FornecedorControle {
     }
 
     public ListDataModel getModelFornecedores() {
-        return modelFornecedores;
+        return (ListDataModel) modelFornecedores;
     }
     
 }
