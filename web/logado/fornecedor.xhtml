@@ -8,18 +8,20 @@
 
     <ui:define name="content">
         <h:form id="form">   
-            <p:growl id="growl" showDetail="true" />  
-            <p:tabView>
+            <p:tabView activeIndex="#{fornecedorC.numeroAba}">
                 <p:tab title="Pesquisa">
+                    <p:messages id="messages" closable="true">
+                        <p:autoUpdate />
+                    </p:messages>
+                    <!--<p:growl id="men" life="500"/>-->
                     <p:panel id="basic" header="Pesquisa Fornecedor" style="margin-bottom:20px">
                         <h:panelGrid columns="3" cellpadding="10">
                             <p:outputLabel for="nome" value="Nome: " />
-                            <p:inputText id="nome" value="#{fornecedorC.fornecedor.nome}" required="true" requiredMessage="O NOME é obrigatório!"/>
-                            <p:message for="name" />
-                            <p:commandButton value="Pesquisar" actionListener="#{fornecedorC.pesquisarPorNome()}" update="tabela"/>
-                        
+                            <p:inputText id="nome" value="#{fornecedorC.fornecedor.nome}" required="true"
+                                         requiredMessage="O NOME é obrigatório!"/>
+                            <p:commandButton value="Pesquisar" actionListener="#{fornecedorC.pesquisarPorNome()}"
+                                             update="tabela" process="@this nome"/>
                         </h:panelGrid> 
-
                         <p:dataTable id="tabela" var="fornecedor" rows="10" value="#{fornecedorC.modelFornecedores}"
                                      paginator="true" emptyMessage="Nenhum fornecedor foi encontrado."
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -45,9 +47,12 @@
                             </p:column>
 
                             <p:column headerText="Ação">
-                                <p:commandButton value="Excluir" actionListener="#{fornecedorC.excluir()}" >
+                                <p:commandButton icon="pi pi-trash" actionListener="#{fornecedorC.excluir()}" update="@form" >
                                     <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="pi pi-exclamation-triangle" />
                                 </p:commandButton>
+
+                                <p:commandButton icon="pi pi-pencil" actionListener="#{fornecedorC.alterar()}"
+                                                 update="@form" process="@this"/>
                             </p:column>
 
                         </p:dataTable>  
@@ -59,9 +64,30 @@
                     </p:panel>
                 </p:tab>          
                 <p:tab title="Novo">
-                    <h:panelGrid columns="2" cellpadding="10">
+                    <p:panel header="Cadastro">
+                        <h:panelGrid id="panel_salvar" columns="2" cellpadding="10">
+                            
+                            <p:outputLabel for="fornecedor" value="Nome:"/>
+                            <p:inputText id="fornecedor" value="#{fornecedorC.fornecedor.nome}" required="true" requiredMessage="Nome é obrigatório!"/>
 
-                    </h:panelGrid>
+                            <p:outputLabel for="email" value="Email:"/>
+                            <p:inputText id="email" value="#{fornecedorC.fornecedor.email}" required="true" requiredMessage="Email é obrigatório!"/>
+
+                            <p:outputLabel for="telefone" value="Telefone:"/>
+                            <p:inputMask id="telefone" value="#{fornecedorC.fornecedor.telefone}" mask="(99)9 9999-9999" required="true" requiredMessage="Telefone é obrigatório!"/>
+
+                            <p:outputLabel for="descricao" value="Descrição:"/>
+                            <p:inputTextarea id="descricao" value="#{fornecedorC.fornecedor.descricao}" cols="22" />
+
+                            <h:outputText value=" "/>
+                            <h:panelGroup>
+                                <p:commandButton value="Salvar" actionListener="#{fornecedorC.salvar()}" 
+                                                 process="@this panel_salvar" update="@form" />
+                                <p:commandButton value="Limpar" />
+                            </h:panelGroup>
+                            
+                        </h:panelGrid>
+                    </p:panel>
                 </p:tab>
             </p:tabView>
         </h:form>
