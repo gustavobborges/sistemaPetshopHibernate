@@ -8,50 +8,52 @@
 
     <ui:define name="content">
         <h:form id="form">   
-            <p:tabView activeIndex="#{fornecedorC.numeroAba}">
+            <p:tabView activeIndex="#{produtoC.numeroAba}">
                 <p:tab title="Pesquisa">
                     <p:messages id="messages" closable="true">
                         <p:autoUpdate />
                     </p:messages>
                     <!--<p:growl id="men" life="500"/>-->
-                    <p:panel id="basic" header="Pesquisa Fornecedor" style="margin-bottom:20px">
+                    <p:panel id="basic" header="Pesquisa Produto" style="margin-bottom:20px">
                         <h:panelGrid columns="3" cellpadding="10">
                             <p:outputLabel for="nome" value="Nome: " />
-                            <p:inputText id="nome" value="#{fornecedorC.fornecedor.nome}" required="true"
+                            <p:inputText id="nome" value="#{produtoC.produto.nome}" required="true"
                                          requiredMessage="O NOME é obrigatório!"/>
-                            <p:commandButton value="Pesquisar" actionListener="#{fornecedorC.pesquisarPorNome()}"
+                            <p:commandButton value="Pesquisar" actionListener="#{produtoC.pesquisarPorNome()}"
                                              update="tabela" process="@this nome"/>
                         </h:panelGrid> 
-                        <p:dataTable id="tabela" var="fornecedor" rows="10" value="#{fornecedorC.modelFornecedores}"
-                                     paginator="true" emptyMessage="Nenhum fornecedor foi encontrado."
+                        <p:dataTable id="tabela" var="produto" rows="10" value="#{produtoC.modelProdutos}"
+                                     paginator="true" emptyMessage="Nenhum produto foi encontrado."
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                                      rowsPerPageTemplate="5,10,15">
 
                             <p:column headerText="Nome">
-                                <h:outputText value="#{fornecedor.nome}" />
+                                <h:outputText value="#{produto.nome}" />
                             </p:column>
 
-                            <p:column headerText="Email">
-                                <h:outputText value="#{fornecedor.email}" />
+                            <p:column headerText="Estoque">
+                                <h:outputText value="#{produto.estoque}" />
                             </p:column>
 
-                            <p:column headerText="Telefone">
-                                <h:outputText value="#{fornecedor.telefone}" />
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{produto.codigo}" />
                             </p:column>
 
-                            <p:column headerText="Cadastro">
-                                <h:outputText value="#{fornecedor.dataCadastro}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy" />
-                                </h:outputText>
+                            <p:column headerText="Descricao">
+                                <h:outputText value="#{produto.descricao}" />
+                            </p:column>
+                            
+                            <p:column headerText="Preco">
+                                <h:outputText value="#{produto.preco}" />
                             </p:column>
 
                             <p:column headerText="Ação">
-                                <p:commandButton icon="pi pi-trash" actionListener="#{fornecedorC.excluir()}" update="@form" >
+                                <p:commandButton icon="pi pi-trash" actionListener="#{produtoC.excluir()}" update="@form" >
                                     <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="pi pi-exclamation-triangle" />
                                 </p:commandButton>
 
-                                <p:commandButton icon="pi pi-pencil" actionListener="#{fornecedorC.alterar()}"
+                                <p:commandButton icon="pi pi-pencil" actionListener="#{produtoC.alterar()}"
                                                  update="@form" process="@this"/>
                             </p:column>
 
@@ -67,21 +69,26 @@
                     <p:panel header="Cadastro">
                         <h:panelGrid id="panel_salvar" columns="2" cellpadding="10">
                             
-                            <p:outputLabel for="fornecedor" value="Nome:"/>
-                            <p:inputText id="fornecedor" value="#{fornecedorC.fornecedor.nome}" required="true" requiredMessage="Nome é obrigatório!"/>
+                            <p:outputLabel for="produto" value="Nome:"/>
+                            <p:inputText id="produto" value="#{produtoC.produto.nome}" required="true" requiredMessage="Nome é obrigatório!"/>
 
-                            <p:outputLabel for="email" value="Email:"/>
-                            <p:inputText id="email" value="#{fornecedorC.fornecedor.email}" required="true" requiredMessage="Email é obrigatório!"/>
+                            <p:outputLabel for="codigo" value="Código:"/>
+                            <p:inputText id="codigo" value="#{produtoC.produto.codigo}" required="true" requiredMessage="Código é obrigatório!"/>
 
-                            <p:outputLabel for="telefone" value="Telefone:"/>
-                            <p:inputMask id="telefone" value="#{fornecedorC.fornecedor.telefone}" mask="(99)9999-9999" required="true" requiredMessage="Telefone é obrigatório!"/>
+                            <p:outputLabel for="preco" value="Preço:"/>
+                            <p:inputText id="preco" value="#{produtoC.produto.preco}" required="false" requiredMessage="Preço é obrigatório!">
+                                <f:convertNumber pattern="#,##0.00" locale="pt_BR" />
+                            </p:inputText>
 
                             <p:outputLabel for="descricao" value="Descrição:"/>
-                            <p:inputTextarea id="descricao" value="#{fornecedorC.fornecedor.descricao}" cols="22" />
+                            <p:inputTextarea id="descricao" value="#{produtoC.produto.descricao}" cols="22" />
+                            
+                             <p:outputLabel for="estoque" value="Estoque:"/>
+                            <p:inputText id="estoque" value="#{produtoC.produto.estoque}" required="false" requiredMessage="Estoque é obrigatório!"/>
 
                             <h:outputText value=" "/>
                             <h:panelGroup>
-                                <p:commandButton value="Salvar" actionListener="#{fornecedorC.salvar()}" 
+                                <p:commandButton value="Salvar" actionListener="#{produtoC.salvar()}" 
                                                  process="@this panel_salvar" update="@form" />
                                 <p:commandButton value="Limpar" />
                             </h:panelGroup>

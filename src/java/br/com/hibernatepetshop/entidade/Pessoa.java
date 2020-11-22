@@ -35,7 +35,7 @@ public class Pessoa implements Serializable {
     @Column(length = 100, nullable = false, unique = true)
     private String email;
     
-    @Column(length = 14, nullable = false, unique = true)
+    @Column(length = 14, nullable = false)
     private String telefone;
 
     public Pessoa() {

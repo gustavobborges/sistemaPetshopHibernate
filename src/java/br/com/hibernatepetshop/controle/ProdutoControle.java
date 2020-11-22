@@ -5,11 +5,10 @@
  */
 package br.com.hibernatepetshop.controle;
 
-import br.com.hibernatepetshop.dao.FornecedorDao;
-import br.com.hibernatepetshop.dao.FornecedorDaoImpl;
+import br.com.hibernatepetshop.dao.ProdutoDao;
+import br.com.hibernatepetshop.dao.ProdutoDaoImpl;
 import br.com.hibernatepetshop.dao.HibernateUtil;
-import br.com.hibernatepetshop.entidade.Fornecedor;
-import java.util.Date;
+import br.com.hibernatepetshop.entidade.Produto;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -23,22 +22,22 @@ import org.hibernate.Session;
  *
  * @author gusta
  */
-@ManagedBean(name = "fornecedorC")
+@ManagedBean(name = "produtoC")
 @ViewScoped
-public class FornecedorControle {
+public class ProdutoControle {
 
-    private Fornecedor fornecedor;
-    private FornecedorDao fornecedorDao;
+    private Produto produto;
+    private ProdutoDao produtoDao;
     private Session session;
-    private DataModel<Fornecedor> modelFornecedores;
+    private DataModel<Produto> modelProdutos;
     private int numeroAba = 0;
 
     public void pesquisarPorNome() {
         try {
-            fornecedorDao = new FornecedorDaoImpl();
+            produtoDao = new ProdutoDaoImpl();
             session = HibernateUtil.abrirSessao();
-            List<Fornecedor> fornecedores = fornecedorDao.pesquisarPorNome(fornecedor.getNome(), session);
-            modelFornecedores = new ListDataModel(fornecedores);
+            List<Produto> produtos = produtoDao.pesquisarPorNome(produto.getNome(), session);
+            modelProdutos = new ListDataModel(produtos);
         } catch (Exception e) {
             System.out.println("Erro ao pesquisar por nome - controle " + e.getMessage());
         } finally {
@@ -47,15 +46,15 @@ public class FornecedorControle {
     }
 
     public void excluir() {
-        fornecedor = modelFornecedores.getRowData();
+        produto = modelProdutos.getRowData();
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             session = HibernateUtil.abrirSessao();
-            fornecedorDao = new FornecedorDaoImpl();
-            fornecedorDao.remover(fornecedor, session);
+            produtoDao = new ProdutoDaoImpl();
+            produtoDao.remover(produto, session);
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Excluído com sucesso!", ""));
-            fornecedor.setNome(null);
-            modelFornecedores = null;
+            produto.setNome(null);
+            modelProdutos = null;
         } catch (Exception e) {
             System.out.println("Erro ao excluir" + e.getMessage());
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao Excluír!", ""));
@@ -67,18 +66,17 @@ public class FornecedorControle {
 
     public void alterar() {
         numeroAba = 1;
-        fornecedor = modelFornecedores.getRowData();
+        produto = modelProdutos.getRowData();
     }
 
     public void salvar() {
         FacesContext context = FacesContext.getCurrentInstance();
-        fornecedorDao = new FornecedorDaoImpl();
+        produtoDao = new ProdutoDaoImpl();
         session = HibernateUtil.abrirSessao();
         try {
-            fornecedor.setDataCadastro(new Date());
-            fornecedorDao.salvarOuAlterar(fornecedor, session);
+            produtoDao.salvarOuAlterar(produto, session);
             context.addMessage(null, new FacesMessage("Salvo com sucesso!", ""));
-            fornecedor = new Fornecedor();
+            produto = new Produto();
             numeroAba = 0;
         } catch (Exception e) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao Salvar!" + e.getMessage(), ""));
@@ -88,19 +86,19 @@ public class FornecedorControle {
     }
 
     //getters e setters
-    public Fornecedor getFornecedor() {
-        if (fornecedor == null) {
-            fornecedor = new Fornecedor();
+    public Produto getProduto() {
+        if (produto == null) {
+            produto = new Produto();
         }
-        return fornecedor;
+        return produto;
     }
 
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
-    public ListDataModel getModelFornecedores() {
-        return (ListDataModel) modelFornecedores;
+    public ListDataModel getModelProdutos() {
+        return (ListDataModel) modelProdutos;
     }
 
     public int getNumeroAba() {
@@ -110,5 +108,4 @@ public class FornecedorControle {
     public void setNumeroAba(int numeroAba) {
         this.numeroAba = numeroAba;
     }
-
 }

@@ -34,7 +34,7 @@ public class ProdutoDaoImpl extends BaseDaoImpl<Produto, Long> implements Produt
         Query consulta = session.createQuery("FROM Produto WHERE fornecedor.nome LIKE :nomeFornecedor");
         consulta.setParameter("nomeFornecedor", "%" + fornecedor + "%");
         return consulta.list();
-           }
+    }
 
     @Override
     public List<Produto> pesquisarPorProdutoEstoque(int qtd, String nome, Session session) throws HibernateException {
