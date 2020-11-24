@@ -15,7 +15,7 @@
                     </p:messages>
                     <!--<p:growl id="men" life="500"/>-->
                     <p:panel id="basic" header="Pesquisa Fornecedor" style="margin-bottom:20px">
-                        <h:panelGrid columns="3" cellpadding="10">
+                        <h:panelGrid columns="3" cellpadding="5">
                             <p:outputLabel for="nome" value="Nome: " />
                             <p:inputText id="nome" value="#{fornecedorC.fornecedor.nome}" required="true"
                                          requiredMessage="O NOME é obrigatório!"/>
@@ -65,8 +65,8 @@
                 </p:tab>          
                 <p:tab title="Novo">
                     <p:panel header="Cadastro">
-                        <h:panelGrid id="panel_salvar" columns="2" cellpadding="10">
-                            
+                        <h:panelGrid id="panel_salvar" columns="2" cellpadding="5">
+
                             <p:outputLabel for="fornecedor" value="Nome:"/>
                             <p:inputText id="fornecedor" value="#{fornecedorC.fornecedor.nome}" required="true" requiredMessage="Nome é obrigatório!"/>
 
@@ -79,15 +79,47 @@
                             <p:outputLabel for="descricao" value="Descrição:"/>
                             <p:inputTextarea id="descricao" value="#{fornecedorC.fornecedor.descricao}" cols="22" />
 
-                            <h:outputText value=" "/>
-                            <h:panelGroup>
-                                <p:commandButton value="Salvar" actionListener="#{fornecedorC.salvar()}" 
-                                                 process="@this panel_salvar" update="@form" />
-                                <p:commandButton value="Limpar" />
-                            </h:panelGroup>
-                            
                         </h:panelGrid>
+
+                        <p:dataTable id="tabelaEndereco" var="endereco" rows="10" value="#{fornecedorC.enderecos}"
+                                     paginator="true" emptyMessage="Nenhum fornecedor foi encontrado."
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,15">
+
+                            <p:column headerText="Logradouro">
+                                <h:outputText value="#{endereco.logradouro}, #{endereco.numero}" />
+                            </p:column>
+
+                            <p:column headerText="Bairro">
+                                <h:outputText value="#{endereco.bairro}" />
+                            </p:column>
+
+                            <p:column headerText="Cidade">
+                                <h:outputText value="#{endereco.cidade}" />
+                            </p:column>
+
+                            <p:column headerText="CEP">
+                                <h:outputText value="#{endereco.cep}" />
+                            </p:column>
+
+
+                            <!--                            <p:column headerText="Ação">
+                                                            <p:commandButton icon="pi pi-trash" actionListener="#{fornecedorC.excluir()}" update="@form" >
+                                                                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="pi pi-exclamation-triangle" />
+                                                            </p:commandButton>
+                            
+                                                            <p:commandButton icon="pi pi-pencil" actionListener="#{fornecedorC.alterar()}"
+                                                                             update="@form" process="@this"/>
+                                                        </p:column>-->
+
+                        </p:dataTable>
                     </p:panel>
+                    <h:panelGrid columns="2">
+                        <p:commandButton value="Salvar" actionListener="#{fornecedorC.salvar()}" 
+                                         process="@this panel_salvar" update="@form" />
+                        <p:commandButton value="Limpar" />
+                    </h:panelGrid>
                 </p:tab>
             </p:tabView>
         </h:form>

@@ -8,6 +8,7 @@ package br.com.hibernatepetshop.controle;
 import br.com.hibernatepetshop.dao.FornecedorDao;
 import br.com.hibernatepetshop.dao.FornecedorDaoImpl;
 import br.com.hibernatepetshop.dao.HibernateUtil;
+import br.com.hibernatepetshop.entidade.Endereco;
 import br.com.hibernatepetshop.entidade.Fornecedor;
 import java.util.Date;
 import java.util.List;
@@ -28,9 +29,11 @@ import org.hibernate.Session;
 public class FornecedorControle {
 
     private Fornecedor fornecedor;
+    private Endereco endereco;
     private FornecedorDao fornecedorDao;
     private Session session;
     private DataModel<Fornecedor> modelFornecedores;
+    private List<Endereco> enderecos;
     private int numeroAba = 0;
 
     public void pesquisarPorNome() {
@@ -68,6 +71,7 @@ public class FornecedorControle {
     public void alterar() {
         numeroAba = 1;
         fornecedor = modelFornecedores.getRowData();
+        enderecos = fornecedor.getEnderecos();
     }
 
     public void salvar() {
@@ -110,5 +114,10 @@ public class FornecedorControle {
     public void setNumeroAba(int numeroAba) {
         this.numeroAba = numeroAba;
     }
+    
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
 
+    
 }
