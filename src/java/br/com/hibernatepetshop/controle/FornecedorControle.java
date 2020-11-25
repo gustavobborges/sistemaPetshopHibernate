@@ -10,6 +10,7 @@ import br.com.hibernatepetshop.dao.FornecedorDaoImpl;
 import br.com.hibernatepetshop.dao.HibernateUtil;
 import br.com.hibernatepetshop.entidade.Endereco;
 import br.com.hibernatepetshop.entidade.Fornecedor;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -90,6 +91,15 @@ public class FornecedorControle {
             session.close();
         }
     }
+    
+    public void salvarEndereco() {
+        if(enderecos == null) {
+            enderecos = new ArrayList<>();
+            fornecedor.setEnderecos(enderecos);
+        }
+        enderecos.add(endereco);
+        endereco.setFornecedor(fornecedor);
+    }
 
     //getters e setters
     public Fornecedor getFornecedor() {
@@ -119,5 +129,15 @@ public class FornecedorControle {
         return enderecos;
     }
 
+    public Endereco getEndereco() {
+        if (endereco == null) {
+            endereco = new Endereco();
+        }
+        return endereco;
+    }   
     
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+     
 }

@@ -80,6 +80,36 @@
                             <p:inputTextarea id="descricao" value="#{fornecedorC.fornecedor.descricao}" cols="22" />
 
                         </h:panelGrid>
+                        <p:commandButton value="Adicionar Endereço" type="button" onclick="PF('dlg2').show();" />
+
+                        <p:dialog id="painel_endereco" header="Endereço" widgetVar="dlg2" width="400" height="480">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel for="logradouro" value="Logradouro" />
+                                <p:inputText id="logradouro" value="#{fornecedorC.endereco.logradouro}" />
+
+                                <h:outputLabel for="numero" value="Número" />
+                                <p:inputText id="numero" value="#{fornecedorC.endereco.numero}" />
+
+                                <h:outputLabel for="bairro" value="Bairro" />
+                                <p:inputText id="bairro" value="#{fornecedorC.endereco.bairro}" />
+
+                                <h:outputLabel for="cidade" value="Cidade" />
+                                <p:inputText id="cidade" value="#{fornecedorC.endereco.cidade}" />
+
+                                <h:outputLabel for="estado" value="Estado" />
+                                <p:inputText id="estado" value="#{fornecedorC.endereco.estado}" />
+
+                                <h:outputLabel for="cep" value="CEP" />
+                                <p:inputMask id="cep" value="#{fornecedorC.endereco.cep}" mask="99999-999"/>
+                                
+                                <h:outputLabel for="complemento" value="Complemento" />
+                                <p:inputTextarea id="complemento" value="#{fornecedorC.endereco.complemento}"/>
+
+                                <h:outputLabel/>
+                                <p:commandButton value="Salvar" actionListener="#{fornecedorC.salvarEndereco()}"
+                                                 update="tabelaEndereco" process="@this painel_endereco" onclick="PF('dlg2').hide();"/>
+                            </h:panelGrid>
+                        </p:dialog>   
 
                         <p:dataTable id="tabelaEndereco" var="endereco" rows="10" value="#{fornecedorC.enderecos}"
                                      paginator="true" emptyMessage="Nenhum fornecedor foi encontrado."
