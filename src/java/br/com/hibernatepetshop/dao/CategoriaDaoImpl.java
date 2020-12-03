@@ -31,7 +31,7 @@ public class CategoriaDaoImpl extends BaseDaoImpl<Categoria, Long> implements Ca
 
     @Override
     public List<Categoria> pesquisarTodo(Session session) throws HibernateException {
-        Query consulta = session.createQuery("from Categoria ");
+        Query consulta = session.createQuery("from Categoria");
         return consulta.list();
     }
 

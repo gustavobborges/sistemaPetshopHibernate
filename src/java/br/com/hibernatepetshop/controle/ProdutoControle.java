@@ -5,10 +5,17 @@
  */
 package br.com.hibernatepetshop.controle;
 
+import br.com.hibernatepetshop.dao.CategoriaDao;
+import br.com.hibernatepetshop.dao.CategoriaDaoImpl;
+import br.com.hibernatepetshop.dao.FornecedorDao;
+import br.com.hibernatepetshop.dao.FornecedorDaoImpl;
 import br.com.hibernatepetshop.dao.ProdutoDao;
 import br.com.hibernatepetshop.dao.ProdutoDaoImpl;
 import br.com.hibernatepetshop.dao.HibernateUtil;
+import br.com.hibernatepetshop.entidade.Categoria;
+import br.com.hibernatepetshop.entidade.Fornecedor;
 import br.com.hibernatepetshop.entidade.Produto;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,7 +23,10 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.faces.model.SelectItem;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.primefaces.event.TabChangeEvent;
 
 /**
  *
@@ -31,6 +41,10 @@ public class ProdutoControle {
     private Session session;
     private DataModel<Produto> modelProdutos;
     private int numeroAba = 0;
+    private List<SelectItem> itensCategorias;
+    private List<SelectItem> itensFornecedores;
+    private Fornecedor fornecedor;
+    private Categoria categoria;
 
     public void pesquisarPorNome() {
         try {
@@ -40,6 +54,50 @@ public class ProdutoControle {
             modelProdutos = new ListDataModel(produtos);
         } catch (Exception e) {
             System.out.println("Erro ao pesquisar por nome - controle " + e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+
+    public void onTabChange(TabChangeEvent event) {
+        produto = new Produto();
+        if (event.getTab().getTitle().equals("Novo")) {
+            if (itensFornecedores == null) {
+                carregarComboboxFornecedor();
+            }
+            if (itensCategorias == null) {
+                carregarComboboxCategoria();
+            }
+        }
+    }
+
+    public void carregarComboboxFornecedor() {
+        FornecedorDao fornecedorDao = new FornecedorDaoImpl();
+        session = HibernateUtil.abrirSessao();
+        itensFornecedores = new ArrayList<>();
+        try {
+            List<Fornecedor> listaFornecedores = fornecedorDao.pesquisarTodo(session);
+            for (Fornecedor forn : listaFornecedores) {
+                itensFornecedores.add(new SelectItem(forn.getId(), forn.getNome()));
+            }
+        } catch (HibernateException e) {
+            System.out.println("Erro ao carregar a lista");
+        } finally {
+            session.close();
+        }
+    }
+
+    public void carregarComboboxCategoria() {
+        CategoriaDao categoriaDao = new CategoriaDaoImpl();
+        session = HibernateUtil.abrirSessao();
+        itensCategorias = new ArrayList<>();
+        try {
+            List<Categoria> listaCategorias = categoriaDao.pesquisarTodo(session);
+            for (Categoria cat : listaCategorias) {
+                itensCategorias.add(new SelectItem(cat.getId(), cat.getNome()));
+            }
+        } catch (HibernateException e) {
+            System.out.println("Erro ao carregar a lista");
         } finally {
             session.close();
         }
@@ -74,6 +132,8 @@ public class ProdutoControle {
         produtoDao = new ProdutoDaoImpl();
         session = HibernateUtil.abrirSessao();
         try {
+            produto.setFornecedor(fornecedor);
+            produto.setCategoria(categoria);
             produtoDao.salvarOuAlterar(produto, session);
             context.addMessage(null, new FacesMessage("Salvo com sucesso!", ""));
             produto = new Produto();
@@ -108,4 +168,35 @@ public class ProdutoControle {
     public void setNumeroAba(int numeroAba) {
         this.numeroAba = numeroAba;
     }
+
+    public List<SelectItem> getItensFornecedores() {
+        return itensFornecedores;
+    }
+
+    public Fornecedor getFornecedor() {
+        if (fornecedor == null) {
+            fornecedor = new Fornecedor();
+        }
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public List<SelectItem> getItensCategorias() {
+        return itensCategorias;
+    }
+
+    public Categoria getCategoria() {
+        if (categoria == null) {
+            categoria = new Categoria();
+        }
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
 }

@@ -86,7 +86,7 @@ public class CategoriaDaoImplTest {
         assertTrue(!categorias.isEmpty());
     }
 
-    @Test
+//    @Test
     public void testPesquisarPorNomeProduto() {
         System.out.println("pesquisarPorNomeProduto");
         session = HibernateUtil.abrirSessao();

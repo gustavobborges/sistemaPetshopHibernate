@@ -132,7 +132,9 @@ public class FornecedorControle {
             enderecos = new ArrayList<>();
             fornecedor.setEnderecos(enderecos);
         }
-        enderecos.add(endereco);
+        if(endereco.getId() == null) {
+            enderecos.add(endereco);
+        }
         endereco.setFornecedor(fornecedor);
     }
 

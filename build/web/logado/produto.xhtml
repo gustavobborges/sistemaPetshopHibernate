@@ -9,6 +9,7 @@
     <ui:define name="content">
         <h:form id="form">   
             <p:tabView activeIndex="#{produtoC.numeroAba}">
+                <p:ajax event="tabChange" listener="#{produtoC.onTabChange}" update="form:j_idt33:fornecedor form:j_idt33:categoria"/>
                 <p:tab title="Pesquisa">
                     <p:messages id="messages" closable="true">
                         <p:autoUpdate />
@@ -43,7 +44,7 @@
                             <p:column headerText="Descricao">
                                 <h:outputText value="#{produto.descricao}" />
                             </p:column>
-                            
+
                             <p:column headerText="Preco">
                                 <h:outputText value="#{produto.preco}" />
                             </p:column>
@@ -68,7 +69,7 @@
                 <p:tab title="Novo">
                     <p:panel header="Cadastro">
                         <h:panelGrid id="panel_salvar" columns="2" cellpadding="10">
-                            
+
                             <p:outputLabel for="produto" value="Nome:"/>
                             <p:inputText id="produto" value="#{produtoC.produto.nome}" required="true" requiredMessage="Nome é obrigatório!"/>
 
@@ -82,9 +83,21 @@
 
                             <p:outputLabel for="descricao" value="Descrição:"/>
                             <p:inputTextarea id="descricao" value="#{produtoC.produto.descricao}" cols="22" />
-                            
-                             <p:outputLabel for="estoque" value="Estoque:"/>
+
+                            <p:outputLabel for="estoque" value="Estoque:"/>
                             <p:inputText id="estoque" value="#{produtoC.produto.estoque}" required="false" requiredMessage="Estoque é obrigatório!"/>
+
+                            <p:outputLabel for="fornecedor" value="Fornecedor:"/>
+                            <p:selectOneMenu id="fornecedor" value="#{produtoC.fornecedor.id}">
+                                <f:selectItem itemLabel="Escolha um fornecedor" itemValue="" />
+                                <f:selectItems value="#{produtoC.itensFornecedores}" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="categoria" value="Categoria:"/>
+                            <p:selectOneMenu id="categoria" value="#{produtoC.categoria.id}">
+                                <f:selectItem itemLabel="Escolha uma categoria" itemValue="" />
+                                <f:selectItems value="#{produtoC.itensCategorias}" />
+                            </p:selectOneMenu>
 
                             <h:outputText value=" "/>
                             <h:panelGroup>
@@ -92,7 +105,7 @@
                                                  process="@this panel_salvar" update="@form" />
                                 <p:commandButton value="Limpar" />
                             </h:panelGroup>
-                            
+
                         </h:panelGrid>
                     </p:panel>
                 </p:tab>

@@ -8,7 +8,7 @@
 
     <ui:define name="content">
         <h:form id="form">   
-            <p:tabView activeIndex="#{fornecedorC.numeroAba}">
+            <p:tabView id ="table_fornecedor" activeIndex="#{fornecedorC.numeroAba}">
                 <p:tab title="Pesquisa">
                     <p:messages id="messages" closable="true">
                         <p:autoUpdate />
@@ -82,34 +82,7 @@
                         </h:panelGrid>
                         <p:commandButton value="Adicionar Endereço" type="button" onclick="PF('dlg2').show();" />
 
-                        <p:dialog id="painel_endereco" header="Endereço" widgetVar="dlg2" width="400" height="480">
-                            <h:panelGrid columns="2">
-                                <h:outputLabel for="logradouro" value="Logradouro" />
-                                <p:inputText id="logradouro" value="#{fornecedorC.endereco.logradouro}" />
-
-                                <h:outputLabel for="numero" value="Número" />
-                                <p:inputText id="numero" value="#{fornecedorC.endereco.numero}" />
-
-                                <h:outputLabel for="bairro" value="Bairro" />
-                                <p:inputText id="bairro" value="#{fornecedorC.endereco.bairro}" />
-
-                                <h:outputLabel for="cidade" value="Cidade" />
-                                <p:inputText id="cidade" value="#{fornecedorC.endereco.cidade}" />
-
-                                <h:outputLabel for="estado" value="Estado" />
-                                <p:inputText id="estado" value="#{fornecedorC.endereco.estado}" />
-
-                                <h:outputLabel for="cep" value="CEP" />
-                                <p:inputMask id="cep" value="#{fornecedorC.endereco.cep}" mask="99999-999"/>
-
-                                <h:outputLabel for="complemento" value="Complemento" />
-                                <p:inputTextarea id="complemento" value="#{fornecedorC.endereco.complemento}"/>
-
-                                <h:outputLabel/>
-                                <p:commandButton value="Salvar" actionListener="#{fornecedorC.salvarEndereco()}"
-                                                 update="tabelaEndereco" process="@this painel_endereco" onclick="PF('dlg2').hide();"/>
-                            </h:panelGrid>
-                        </p:dialog>   
+                     
 
                         <p:dataTable id="tabelaEndereco" var="endereco" rows="10" value="#{fornecedorC.enderecos}"
                                      paginator="true" emptyMessage="Nenhum fornecedor foi encontrado."
@@ -143,11 +116,43 @@
                                                icon="pi pi-exclamation-triangle" />
                                 </p:commandButton>
 
-                                <p:commandButton icon="pi pi-pencil" type="button" actionListener="#{fornecedorC.carregarEndereco(endereco)}" 
-                                                 onclick="PF('dlg2').show();"
-                                                 update="@form" process="@this tabelaEndereco"/>
+                                <p:commandButton actionListener="#{fornecedorC.carregarEndereco(endereco)}"
+                                                 process="@this"
+                                                 icon="pi pi-pencil"  
+                                                 update="form:table_fornecedor:grid_endereco"   
+                                                 oncomplete="PF('dlg2').show()"/>
                             </p:column>
                         </p:dataTable>
+                        
+                           <p:dialog id="painel_endereco" header="Endereço" widgetVar="dlg2" width="400" height="480">
+                            <h:panelGrid id="grid_endereco" columns="2">
+                                <h:outputLabel for="logradouro" value="Logradouro" />
+                                <p:inputText id="logradouro" value="#{fornecedorC.endereco.logradouro}" />
+
+                                <h:outputLabel for="numero" value="Número" />
+                                <p:inputText id="numero" value="#{fornecedorC.endereco.numero}" />
+
+                                <h:outputLabel for="bairro" value="Bairro" />
+                                <p:inputText id="bairro" value="#{fornecedorC.endereco.bairro}" />
+
+                                <h:outputLabel for="cidade" value="Cidade" />
+                                <p:inputText id="cidade" value="#{fornecedorC.endereco.cidade}" />
+
+                                <h:outputLabel for="estado" value="Estado" />
+                                <p:inputText id="estado" value="#{fornecedorC.endereco.estado}" />
+
+                                <h:outputLabel for="cep" value="CEP" />
+                                <p:inputMask id="cep" value="#{fornecedorC.endereco.cep}" mask="99999-999"/>
+
+                                <h:outputLabel for="complemento" value="Complemento" />
+                                <p:inputTextarea id="complemento" value="#{fornecedorC.endereco.complemento}"/>
+
+                                <h:outputLabel/>
+                                <p:commandButton value="Salvar" actionListener="#{fornecedorC.salvarEndereco()}"
+                                                 update="tabelaEndereco" process="@this painel_endereco" onclick="PF('dlg2').hide();"/>
+                            </h:panelGrid>
+                        </p:dialog>   
+                        
                     </p:panel>
                     <h:panelGrid columns="2">
                         <p:commandButton value="Salvar" actionListener="#{fornecedorC.salvar()}" 

@@ -10,8 +10,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         <h:outputStylesheet library="css" name="default.css" />
-<!--        <h:outputStylesheet library="css" name="cssLayout.css" />
-        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />-->
+        <!--<h:outputStylesheet library="css" name="cssLayout.css" />-->
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 
         <title>Principal</title>
     </h:head>
@@ -24,8 +24,9 @@
                     <p:menuitem value="Home" outcome="index" />
                     <p:submenu label="Cadastro" icon="pi pi-file">
                         <p:menuitem value="Fornecedor" outcome="fornecedor.senac" />
-                        <p:menuitem value="Funcionário" url="#" />
                         <p:menuitem value="Produto" outcome="produto.senac" />
+                        <p:menuitem value="Categoria" outcome="categoria.senac" />
+
 
                         <p:separator />
                         <p:menuitem value="Quit" url="#" />
