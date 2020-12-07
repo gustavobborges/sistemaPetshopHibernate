@@ -9,7 +9,9 @@
     <ui:define name="content">
         <h:form id="form">   
             <p:tabView activeIndex="#{produtoC.numeroAba}">
-                <p:ajax event="tabChange" listener="#{produtoC.onTabChange}" update="form:j_idt33:fornecedor form:j_idt33:categoria"/>
+                <p:ajax event="tabChange" listener="#{produtoC.onTabChange}" update="form:j_idt34:fornecedor form:j_idt34:categoria"/>
+                <!--<p:ajax event="tabChange" listener="#{produtoC.onTabChange}" update="form:j_idt34:categoria"/>-->
+
                 <p:tab title="Pesquisa">
                     <p:messages id="messages" closable="true">
                         <p:autoUpdate />
