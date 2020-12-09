@@ -12,7 +12,6 @@ import br.com.hibernatepetshop.dao.CategoriaDao;
 import br.com.hibernatepetshop.dao.CategoriaDaoImpl;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;

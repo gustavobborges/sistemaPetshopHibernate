@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/gustavo/NetBeansProjects/sistemaPetshopHibernate/web/logado/produto.xhtml</file>
+            <file>file:/home/gustavo/repositorios/NetBeansProjects/sistemaPetshopHibernate/src/java/br/com/hibernatepetshop/controle/ProfessorControle.java</file>
+            <file>file:/home/gustavo/repositorios/NetBeansProjects/sistemaPetshopHibernate/web/resources/css/cssLayout.css</file>
+            <file>file:/home/gustavo/repositorios/NetBeansProjects/sistemaPetshopHibernate/src/java/br/com/hibernatepetshop/controle/FornecedorControle.java</file>
+            <file>file:/home/gustavo/repositorios/NetBeansProjects/sistemaPetshopHibernate/web/logado/fornecedor.xhtml</file>
+            <file>file:/home/gustavo/repositorios/NetBeansProjects/sistemaPetshopHibernate/web/logado/professor.xhtml</file>
+            <file>file:/home/gustavo/repositorios/NetBeansProjects/sistemaPetshopHibernate/src/java/br/com/hibernatepetshop/dao/FornecedorDaoImpl.java</file>
+            <file>file:/home/gustavo/repositorios/NetBeansProjects/sistemaPetshopHibernate/src/java/br/com/hibernatepetshop/dao/FornecedorDao.java</file>
+            <file>file:/home/gustavo/repositorios/NetBeansProjects/sistemaPetshopHibernate/web/resources/css/default.css</file>
         </group>
     </open-files>
 </project-private>

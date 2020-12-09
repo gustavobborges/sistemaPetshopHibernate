@@ -15,7 +15,6 @@ import br.com.hibernatepetshop.entidade.Fornecedor;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -103,11 +102,6 @@ public class FornecedorControle {
 
     public void onRowCancel(RowEditEvent<Endereco> event) {
         System.out.println("Cancelando alterar endereço");
-    }
-
-    public void onCellEdit(CellEditEvent event) {
-//        Object oldValue = event.getOldValue();
-//        Object newValue = event.getNewValue();
     }
 
     public void salvar() {
