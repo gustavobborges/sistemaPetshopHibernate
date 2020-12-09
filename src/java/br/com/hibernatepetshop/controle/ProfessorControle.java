@@ -41,7 +41,6 @@ public class ProfessorControle {
     private Telefone telefone;
     private Endereco endereco;
 
-
     public void pesquisarPorNome() {
         try {
             professorDao = new ProfessorDaoImpl();
@@ -113,6 +112,7 @@ public class ProfessorControle {
         professorDao = new ProfessorDaoImpl();
         session = HibernateUtil.abrirSessao();
         try {
+            professor.setEndereco(endereco);
             professorDao.salvarOuAlterar(professor, session);
             context.addMessage(null, new FacesMessage("Salvo com sucesso!", ""));
             professor = new Professor();
@@ -129,13 +129,17 @@ public class ProfessorControle {
             telefones = new ArrayList<>();
             professor.setTelefones(telefones);
         }
-        if(telefone.getId() == null) {
+        if (telefone.getId() == null) {
             telefones.add(telefone);
         }
         telefone.setPessoaSenac(professor);
     }
     
-     public void carregarEndereco(Endereco endereco) {
+    public void novoTelefone() {
+        telefone = new Telefone();
+    }
+
+    public void carregarEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
@@ -144,13 +148,6 @@ public class ProfessorControle {
     }
 
     public void salvarEndereco() {
-        if (endereco == null) {
-            endereco = new Endereco();
-            professor.setEndereco(endereco);
-        }
-        if(endereco.getId() == null) {
-            endereco.setPessoaSenac(professor);
-        }
         endereco.setPessoaSenac(professor);
     }
 
@@ -194,13 +191,13 @@ public class ProfessorControle {
     }
 
     public Endereco getEndereco() {
+        if (endereco == null) {
+            endereco = new Endereco();
+        }
         return endereco;
     }
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-    
-    
-
 }

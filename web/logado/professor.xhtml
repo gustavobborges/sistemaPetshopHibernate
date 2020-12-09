@@ -82,7 +82,7 @@
                         </h:panelGrid>
 
                         <br></br>
-                        <p:commandButton value="Adicionar Telefone" type="button" onclick="PF('dlg2').show();" />
+                        <p:commandButton value="Adicionar Telefone" process="@this" actionListener="#{professorC.novoTelefone()}" update="form:table_professor:grid_telefone" onclick="PF('dlg2').show();" />
 
 
                         <p:dataTable id="tabelaTelefone" var="telefone" rows="10" value="#{professorC.telefones}"
